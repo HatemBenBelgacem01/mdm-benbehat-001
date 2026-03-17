@@ -17,6 +17,6 @@ COPY backend/app.py backend/app.py
 COPY frontend/build frontend/build
 
 # Docker Run Command
-EXPOSE 80
+EXPOSE 5000
 ENV FLASK_APP=/usr/src/app/backend/app.py
-CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0", "--port=80"]
+CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5000"]
