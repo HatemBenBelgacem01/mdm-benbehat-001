@@ -52,7 +52,7 @@ def download_raw_data() -> None:
         download_path = RAW_DIR / blob.name
         download_path.parent.mkdir(parents=True, exist_ok=True)
         with open(download_path, "wb") as handle:
-            container_client.download_blob(blob).readinto(handle)
+            handle.write(container_client.download_blob(blob).readall())
         print(f"Downloaded {blob.name}")
     print(f"Finished downloading {len(blobs)} files from {container_name}")
 
