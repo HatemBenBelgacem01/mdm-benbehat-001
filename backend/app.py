@@ -71,9 +71,8 @@ def timedelta_minutes(seconds):
     return str(datetime.timedelta(minutes=rounded_minutes))
 
 print("\n*** Flask Backend ***")
-app = Flask(__name__)
-cors = CORS(app)
 app = Flask(__name__, static_url_path='/', static_folder='../frontend/build')
+cors = CORS(app)
 
 @app.route("/")
 def indexPage():
