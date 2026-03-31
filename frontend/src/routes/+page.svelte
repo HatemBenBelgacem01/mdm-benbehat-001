@@ -1,4 +1,64 @@
-﻿<div class="app-bg">
+﻿<script>
+    import { browser, dev } from "$app/environment";
+    import { onMount } from "svelte";
+
+    let url = dev ? "http://localhost:5000" : "";
+    if (!dev && browser) {
+        url = location.protocol + "//" + location.host;
+    }
+
+    let downhill = 300;
+    let uphill = 700;
+    let length = 10000;
+
+    let prediction = "n.a.";
+    let linearPrediction = "n.a.";
+    let din33466 = "n.a.";
+    let sac = "n.a.";
+
+    let debounceId;
+
+    async function predict() {
+        let result = await fetch(
+            url +
+                "/api/predict?" +
+                new URLSearchParams({
+                    downhill: downhill,
+                    uphill: uphill,
+                    length: length,
+                }),
+            {
+                method: "GET",
+            },
+        );
+        let data = await result.json();
+        console.log(data);
+        prediction = data.time;
+        linearPrediction = data.linear;
+        din33466 = data.din33466;
+        sac = data.sac;
+    }
+
+    onMount(() => {
+        predict();
+    });
+
+    function schedulePredict() {
+        if (debounceId) {
+            clearTimeout(debounceId);
+        }
+        debounceId = setTimeout(() => {
+            predict();
+        }, 300);
+    }
+</script>
+
+<svelte:head>
+    <title>HikePlanner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</svelte:head>
+
+<div class="app-bg">
     <main class="container py-5">
         <div class="row g-4 justify-content-center">
             
