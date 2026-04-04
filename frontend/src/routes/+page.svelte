@@ -67,7 +67,7 @@
                     <div class="mb-5">
                         <h1 class="h2 fw-bold mb-2 d-flex align-items-center">
                             <span class="text-primary me-2"><i class="bi bi-map-fill"></i></span>
-                            HikePlanner
+                            HikePlanner benbehat
                         </h1>
                         <p class="text-muted small mb-0">Präzise Gehzeitschätzung durch Machine Learning.</p>
                     </div>
